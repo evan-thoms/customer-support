@@ -40,23 +40,20 @@ const ChatBot = () => {
       </df-messenger>
       <style jsx global>{`
         df-messenger {
-          --df-messenger-bot-message-color: #000; /* Bot message text color */
-          --df-messenger-user-message-color: #000; /* User message text color */
-          --df-messenger-chat-background-color: #f3f6fc; /* Chat background color */
-          --df-messenger-font-family: 'Google Sans', sans-serif; /* Font family */
-          --df-messenger-bot-message: { /* Bot message styling */
-            background-color: #ffffff;
-            color: #000000;
-          };
-          --df-messenger-user-message: { /* User message styling */
-            background-color: #d3e3fd;
-            color: #000000;
-          };
-          --df-messenger-chat: {
-            height: 400px;
-            width: 300px;
-            border: 1px solid #ddd;
-          };
+            z-index:999;
+            position: fixed;
+
+          --df-messenger-font-color: #333;
+          
+            --df-messenger-font-family: Roboto Mono;
+            --df-messenger-chat-background: #f3f6fc;
+            --df-messenger-message-user-background: #bcc9b7;
+            --df-messenger-message-bot-background: #fff;
+            bottom: 16px;
+            right: 16px;
+        }
+        df-messenger-chat-bubble {
+            --df-messenger-chat-window-width: 400px;
         }
       `}</style>
     </>
@@ -64,3 +61,4 @@ const ChatBot = () => {
 };
 
 export default ChatBot;
+

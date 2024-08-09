@@ -1,0 +1,11 @@
+df-messenger {
+    --df-messenger-bot-message-color: #000;
+    --df-messenger-user-message-color: #d68e8e;
+    --df-messenger-chat-background-color: #1456d9;
+    --df-messenger-font-family: 'Google Sans', sans-serif;
+    --df-messenger-bot-message-background-color: #ffffff;
+    --df-messenger-user-message-background-color: #d3e3fd;
+    --df-messenger-chat-height: 400px;
+    --df-messenger-chat-width: 300px;
+    --df-messenger-chat-border: 1px solid #ddd;
+  }

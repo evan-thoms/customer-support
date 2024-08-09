@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import styles from "./page.module.css";
-import ChatBot from './components/Chatbot.js';
+import ChatBot from './components/ChatBot.js';
 
 export default function Home() {
   return (
