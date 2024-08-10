@@ -1,11 +1,13 @@
 import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
+import Link from "next/link";
+
 
 const SignIn = () => {
     return (
         <>
         <Header />
-        <section className="container m-auto flex bg-Cararra justify-center items-center gap-20 h-screen">
+        <section className="flex bg-Cararra justify-center items-center gap-20 h-screen">
             <article className="py-20 flex flex-col gap-10 text-black">
                 <div className="mb-6 ">
                     <h1 className="text-6xl text-bold mb-4">Sign in to</h1>
@@ -14,7 +16,7 @@ const SignIn = () => {
                 <div className="mb-6 flex">
                     <div>
                         <p className="mb-4">If you don’t have an account register</p>
-                        <p className="px-3">You can <span className="text-red-500">Register here!</span></p>
+                        <p className="px-3">You can <Link href="/pages/signup" className="text-red-500">Register here!</Link></p>
                     </div>
                     <img className="h-96" src="/signupin.svg" alt="character with a phone" />
                 </div>
@@ -28,7 +30,7 @@ const SignIn = () => {
                             <input type="checkbox" id="rememberpwd" name="rememberpwd" />
                             <label for="scales">Remember me</label>
                         </div>
-                        <p className="">Forgot password?</p>
+                        <Link href="/pages/forgotpassword" className="">Forgot password?</Link>
                     </div>
 
                     <button className="bg-Masala py-2 text-white rounded">Sign In</button>

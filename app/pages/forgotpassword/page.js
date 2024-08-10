@@ -5,7 +5,7 @@ const ForgotPassword = () => {
     return (
         <>
             <Header />
-            <section className="container m-auto flex bg-Cararra justify-center items-center gap-20 h-screen">
+            <section className="flex bg-Cararra justify-center items-center gap-20 h-screen">
                 <article className="py-20 flex flex-col  text-black">
                     <div className="mb-6 ">
                         <h1 className="text-3xl text-bold">Forgot your password?</h1>

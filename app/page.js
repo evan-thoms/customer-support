@@ -9,7 +9,7 @@ export default function Home() {
 
     <>
       <Header />
-      <main className="container m-auto">
+      <main className="">
 
         <section className="flex justify-center items-center bg-Cararra gap-10 h-screen">
           <article className="py-20">
