@@ -18,10 +18,11 @@ export default function Home() {
               <p className="text-ShadowGreen px-3">your personalized AI support bot</p>
             </div>
             <div className="flex">
-              <input className="w-96 h-9 rounded" />
+              <ChatBot />
+              {/* <input className="w-96 h-9 rounded" />
               <button className="bg-Masala px-6 py-2 rounded-r-lg">
                 <img className="w-4 h-4" src="/Vector.svg" />
-              </button>
+              </button> */}
             </div>
             <div className="h-20"></div>
           </article>
