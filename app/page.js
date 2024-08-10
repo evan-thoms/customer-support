@@ -1,5 +1,6 @@
 'use client'
 
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 
 export default function Home() {
@@ -27,9 +28,7 @@ export default function Home() {
             <img className="h-96" src="/bot.svg" alt="Verda ChatBot SVG" />
           </article>
         </section>
-        <footer className="bg-Cararra">
-          <p>© 2024 Verda Chatbot</p>
-        </footer>
+        <Footer />
       </main >
     </>
 
