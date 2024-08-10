@@ -97,11 +97,12 @@ const ChatBot = () => {
         ))}
       </div>
       <input
+        className="w-96 h-9 rounded"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Type a message..."
       />
-      <button onClick={sendMessage}>Send</button>
+      <button className="bg-Masala px-6 py-2 rounded-r-lg" onClick={sendMessage}><img className="w-4 h-4" src="/Vector.svg" /></button>
     </div>
   );
 };
