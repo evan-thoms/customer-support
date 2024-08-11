@@ -36,7 +36,7 @@ const SignIn = () => {
                     </div>
                     <div className="mb-6 flex">
                         <div>
-                            <p className="mb-4">Don't have an account?</p>
+                            <p className="mb-4">Don&apos;t have an account?</p>
                             <p className="px-3">You can <Link href="/pages/signup" className="text-red-500">Sign up here!</Link></p>
                         </div>
                         <img className="h-96" src="/signupin.svg" alt="character with a laptop" />
