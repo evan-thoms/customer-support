@@ -22,14 +22,16 @@ const ChatbotPage = () => {
         setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage]);
 
         try {
+            console.log("NEW MESSAGE: ", newMessage)
             const response = await fetch('/api/dialogflow', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: userInput }),
+                body: JSON.stringify({ query: userInput }),
             });
             const data = await response.json();
 
-            const botMessage = { sender: 'bot', text: data.reply };
+            const botMessage = { sender: 'bot', text: data.response };
+            console.log("BOTMESSAGE: ", botMessage)
             setChatHistory((prevChatHistory) => [...prevChatHistory, botMessage]);
 
         } catch (error) {
@@ -40,7 +42,7 @@ const ChatbotPage = () => {
     };
 
     return (
-        <>
+        <div className="h-max">
             <header className="flex justify-between items-center py-8 px-10 bg-ClayCreek text-white">
                 <div className="flex px-4 py-3 rounded-full bg-white overflow-hidden w-1/2 ">
                     <input
@@ -88,7 +90,7 @@ const ChatbotPage = () => {
             </header>
             <div className="h-0.5 w-full bg-white"></div>
             <section className="flex h-[calc(100vh-4rem)] overflow-hidden">
-                <article className="flex-2 w-1/5 text-white flex flex-col gap-10 py-10 items-center bg-ClayCreek h-full">
+                <article className="flex-2 w-1/5 text-white flex flex-col gap-10 py-10 items-center bg-ClayCreek h-100">
                     <h1 className=""><b>Verda</b> CHATBOT</h1>
                     <div className="h-0.5 w-full bg-white"></div>
                     <div>
@@ -113,7 +115,7 @@ const ChatbotPage = () => {
                         </ul>
                     </div>
                 </article>
-                <article className="flex flex-1 flex-col justify-center gap-20 bg-Cararra px-36 pt-20 h-full">
+                <article className="flex flex-1 flex-col justify-center gap-20 bg-Cararra px-36 pt-20 h-300px overflow-scroll">
                     {chatHistory.map((message, index) => (
                         <div
                             key={index}
@@ -127,7 +129,7 @@ const ChatbotPage = () => {
                         </div>
                     ))}
 
-                    <div className="flex w-full self-center">
+                    <div className="flex w-full self-center pb-80">
                         <input
                             type="text"
                             className="w-full h-9 rounded px-5"
@@ -141,7 +143,7 @@ const ChatbotPage = () => {
                     </div>
                 </article>
             </section>
-        </>
+        </div>
     );
 };
 
