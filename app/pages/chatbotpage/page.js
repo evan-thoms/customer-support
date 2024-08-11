@@ -4,9 +4,39 @@ import { useState } from "react";
 
 const ChatbotPage = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [userInput, setUserInput] = useState('');
+    const [chatHistory, setChatHistory] = useState([]);
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleInputChange = (e) => {
+        setUserInput(e.target.value);
+    };
+
+    const handleSend = async () => {
+        if (userInput.trim() === '') return;
+
+        const newMessage = { sender: 'user', text: userInput };
+        setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage]);
+
+        try {
+            const response = await fetch('/api/dialogflow', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userInput }),
+            });
+            const data = await response.json();
+
+            const botMessage = { sender: 'bot', text: data.reply };
+            setChatHistory((prevChatHistory) => [...prevChatHistory, botMessage]);
+
+        } catch (error) {
+            console.error("Error fetching chatbot response:", error);
+        }
+
+        setUserInput('');
     };
 
     return (
@@ -24,11 +54,11 @@ const ChatbotPage = () => {
                         </path>
                     </svg>
                 </div>
-                <div className="flex flex-col gap-3">
+                <div className="relative flex flex-col gap-3">
                     <button
                         id="dropdownDefaultButton"
                         onClick={toggleDropdown}
-                        className="text-white bg-Masala font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="text-white bg-Masala font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
                         type="button"
                     >
                         Switch Language
@@ -40,20 +70,19 @@ const ChatbotPage = () => {
                     <div id="dropdown" className={`z-10 ${isDropdownOpen ? "block" : "hidden"} absolute top-20 bg-Masala divide-y divide-gray-100 rounded-lg shadow w-44`}>
                         <ul className="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">language 1</a>
+                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Language 1</a>
                             </li>
                             <li>
-                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">language 2</a>
+                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Language 2</a>
                             </li>
                             <li>
-                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">language 3</a>
+                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Language 3</a>
                             </li>
                             <li>
-                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">language 4</a>
+                                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Language 4</a>
                             </li>
                         </ul>
                     </div>
-
                 </div>
                 <img src="/user.svg" />
             </header>
@@ -83,28 +112,30 @@ const ChatbotPage = () => {
                             <li className="flex gap-2"><img src="/iconmessage.svg" />Platform Marketplace 101</li>
                         </ul>
                     </div>
-
                 </article>
                 <article className="flex flex-1 flex-col justify-center gap-20 bg-Cararra px-36 pt-20 h-full">
-                    <div className="flex gap-3 justify-end">
-                        <div>
-                            <p>The advantages of Artificial Intelligence</p>
+                    {chatHistory.map((message, index) => (
+                        <div
+                            key={index}
+                            className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                        >
+                            {message.sender === 'bot' && <img className="self-start" src="/chatbot.svg" />}
+                            <div>
+                                <p>{message.text}</p>
+                            </div>
+                            {message.sender === 'user' && <img src="/user.svg" />}
                         </div>
-                        <img src="/user.svg" />
-                    </div>
-                    <div className="flex gap-3 justify-start">
-                        <img className="slef-start" src="/chatbot.svg" />
-                        <div>
-                            <p>Artificial Intelligence (AI) offers numerous advantages and has the potential to revolutionize various aspects of our lives. Here are some key advantages of AI:
+                    ))}
 
-                                Automation: AI can automate repetitive and mundane tasks, saving time and effort for humans. It can handle large volumes of data, perform complex calculations, and execute tasks with precision and consistency. This automation leads to increased productivity and efficiency in various industries.
-                                Decision-making: AI systems can analyze vast amounts of data, identify patterns, and make informed decisions based on that analysis. This ability is particularly useful in complex scenarios where humans may struggle to process large datasets or where quick and accurate decisions are crucial.</p>
-                        </div>
-
-                    </div>
                     <div className="flex w-full self-center">
-                        <input type="text" className="w-full h-9 rounded px-5" placeholder="text ..."/>
-                        <button className="bg-Masala px-6 py-2 rounded-r-lg">
+                        <input
+                            type="text"
+                            className="w-full h-9 rounded px-5"
+                            placeholder="Type a message..."
+                            value={userInput}
+                            onChange={handleInputChange}
+                        />
+                        <button className="bg-Masala px-6 py-2 rounded-r-lg" onClick={handleSend}>
                             <img className="w-4 h-4" src="/Vector.svg" />
                         </button>
                     </div>

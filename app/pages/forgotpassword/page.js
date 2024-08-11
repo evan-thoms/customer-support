@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "@/app/firebase"; // Using your import path
+import { auth } from "@/app/firebase";
 import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
 import Link from "next/link";
