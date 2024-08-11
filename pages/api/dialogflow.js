@@ -1,19 +1,6 @@
 import { SessionsClient } from '@google-cloud/dialogflow-cx';
 import { Buffer } from 'buffer';
-// require('dotenv').config();
-// const fs = require('fs');
 
-// const googleCredentialsBase64 = process.env.GOOGLE_APPLICATION_CREDENTIALS;
-//   console.log("INPUT CREDENTIALS: ", googleCredentialsBase64)
-//   const googleCredentials = Buffer.from(googleCredentialsBase64, 'base64').toString('utf8');
-//   console.log("Decoded Credentials:", googleCredentials);
-//   const credentials = JSON.parse(googleCredentials);
-//   console.log("CREDSSSS", credentials)
-
-//   fs.writeFileSync('gcloud-credentials.json', JSON.stringify(credentials));
-
-// // Set the environment variable to point to the newly created file
-// process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname, 'gcloud-credentials.json');
 const sessionId = Math.random().toString(36).substring(7);
 export default async function handler(req, res) {
   const { query } = req.body;
