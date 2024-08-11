@@ -43,7 +43,7 @@ export default function Home() {
       <Header />
       <main className="">
         <section className="flex justify-center items-center bg-Cararra gap-10 h-screen">
-          <article className="py-20 flex flex-col items-center">
+          <article className="py-20 flex flex-col items-center w-1/2">
             <div className="mb-6 text-center">
               <h1 className="text-6xl font-bold text-AquamarineBlue mb-4">
                 {displayText1}
@@ -60,7 +60,7 @@ export default function Home() {
             </div>
             <div className="h-20"></div>
           </article>
-          <article className="py-20 ml-20">
+          <article className="py-20 ml-5">
             <img className="h-[28rem]" src="/bot.svg" alt="Verda ChatBot SVG" />
           </article>
         </section>
