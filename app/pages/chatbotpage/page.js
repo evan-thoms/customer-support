@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const ChatbotPage = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [userInput, setUserInput] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
+    const chatContainerRef = useRef(null);
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -40,6 +41,15 @@ const ChatbotPage = () => {
 
         setUserInput('');
     };
+
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTo({
+            top: chatContainerRef.current.scrollHeight,
+            behavior: "smooth",
+            });
+        }
+    }, [chatHistory]);
 
     return (
         <div className="h-max">
@@ -89,7 +99,7 @@ const ChatbotPage = () => {
                 <img src="/user.svg" />
             </header>
             <div className="h-0.5 w-full bg-white"></div>
-            <section className="flex h-[calc(100vh-4rem)] overflow-hidden">
+            <section className="flex h-[calc(100vh-6.9rem)] overflow-hidden">
                 <article className="flex-2 w-1/5 text-white flex flex-col gap-10 py-10 items-center bg-ClayCreek h-100">
                     <h1 className=""><b>Verda</b> CHATBOT</h1>
                     <div className="h-0.5 w-full bg-white"></div>
@@ -115,7 +125,9 @@ const ChatbotPage = () => {
                         </ul>
                     </div>
                 </article>
-                <article className="flex flex-1 flex-col justify-center gap-20 bg-Cararra px-36 pt-20 h-300px overflow-scroll">
+
+                <article className="flex flex-1 flex-col justify-between gap-10 bg-Cararra px-36 pt-20">
+                    <div className="flex-1 overflow-y-auto flex flex-col gap-7" ref={chatContainerRef}>
                     {chatHistory.map((message, index) => (
                         <div
                             key={index}
@@ -128,8 +140,8 @@ const ChatbotPage = () => {
                             {message.sender === 'user' && <img src="/user.svg" />}
                         </div>
                     ))}
-
-                    <div className="flex w-full self-center pb-80">
+                    </div>
+                    <div className="flex w-full self-center pb-10">
                         <input
                             type="text"
                             className="w-full h-9 rounded px-5"
